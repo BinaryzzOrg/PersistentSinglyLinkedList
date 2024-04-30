@@ -1,6 +1,8 @@
 import java.util.Scanner;
 
 public class Main {
+	// === FIELD VARIABLES === //
+	private static PersistentList pList = new PersistentList();
 
 	// === MAIN METHOD === //
 	public static void main(String[] args) {
@@ -38,39 +40,60 @@ public class Main {
 	 * Singly LinkedList that is chosen by the user. MenuChoices method also handles
 	 * miss inputs of the user and loops if it detects one.
 	 */
+
 	static Scanner sc;
 
 	public static void Menu() {
+		int pLenght = pList.length - 1;
+
 		System.out.print(printMenuChoices());
 
 		switch (checkUserInput(printMenuChoices())) {
 		case 1: {// Append
-			System.out.print("Enter number to be inserted: ");
-			// code
+			String promptAppend = "Enter a number to append: ";
+			System.out.print(promptAppend);
+			pList.append(checkUserInput(promptAppend));
 			break;
 		}
 		case 2: {// Delete
-			System.out.print("Enter number to be deleted: ");
-			// code
+			String promptPosition = "Enter the position of a node to be deleted ((0 - " + pLenght + "): ";
+			System.out.print(promptPosition);
+			pList.delete(checkUserInput(promptPosition));
 			break;
 		}
 		case 3: {// Change Value
-			System.out.print("Enter position of the node you want to change the value of: ");
-			// code
+			// @formatter:off
+			
+			String promptPosition = "Enter the position of the node you want to modify (0 - " + pLenght + "): ";
+			System.out.print(promptPosition);
+			int nodePosition = checkUserInput(promptPosition);
+
+			String promptError = "Entered position is out of bounds, the range of position/s available are (0 - " + pLenght + ")";
+			if (nodePosition > pLenght) {
+				System.out.println(promptError);
+				break;
+			}
+			// @formatter:on
+
+			String promptValue = "Enter a new value: ";
+			System.out.print(promptValue);
+			int replacementValue = checkUserInput(promptValue);
+
+			pList.changeValue(nodePosition, replacementValue);
 			break;
 		}
 		case 4: {// Display
-			System.out.println("{Singly LinkedList}: ");
+			pList.display(1);
 			// code
 			break;
 		}
 		case 5: {// Node History
-			System.out.println("{Singly LinkedList All History}: ");
+			pList.nodeHistory(1);
 			// code
 			break;
 		}
 		case 6: {// List History
-			System.out.println("{Singly LinkedList History}: ");
+			pList.listHistory();
 			// code
 			break;
 		}
@@ -130,4 +153,5 @@ public class Main {
 						"⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃⁃\n";
 		// @formatter:on
 	}// end method
+
 }// end class
