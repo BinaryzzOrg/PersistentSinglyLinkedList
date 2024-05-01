@@ -1,15 +1,26 @@
-
 public class Node {
 
 	// === FIELD VARIABLES === //
-	private int data;
 	private Node next;
+	private Node fatNodes;
+	private int data;
+	private boolean isDeleted;
 
 	// === CONSTRUCTOR === //
 	public Node(int data) {
-		setData(data);
-		setNext(null);
+		this.next = null;
+		this.fatNodes = null;
+		this.data = data;
+		this.isDeleted = false;
 	}// end constructor
+
+	public Node getNext() {
+		return next;
+	}
+
+	public void setNext(Node next) {
+		this.next = next;
+	}
 
 	public int getData() {
 		return data;
@@ -19,12 +30,29 @@ public class Node {
 		this.data = data;
 	}
 
-	public Node getNext() {
-		return next;
+	public Node getFatNodes() {
+		return fatNodes;
 	}
 
-	public void setNext(Node next) {
-		this.next = next;
+	public void setFatNodes(Node fatNodes) {
+		this.fatNodes = fatNodes;
 	}
+
+	public boolean isDeleted() {
+		return isDeleted;
+	}
+
+	public void delete() {
+		this.isDeleted = true;
+	}
+
+	public void prependFatNodes(Node node) {
+		if (fatNodes == null) {
+			fatNodes = node;
+		} else {
+			node.setNext(fatNodes);
+			fatNodes = node;
+		}
+	}// end method
 
 }// end class
