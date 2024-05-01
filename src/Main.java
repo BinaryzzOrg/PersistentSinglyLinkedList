@@ -63,7 +63,6 @@ public class Main {
 		}
 		case 3: {// Change Value
 			// @formatter:off
-			
 			String promptPosition = "Enter the position of the node you want to modify (0 - " + pLenght + "): ";
 			System.out.print(promptPosition);
 			int nodePosition = checkUserInput(promptPosition);
@@ -88,7 +87,10 @@ public class Main {
 			break;
 		}
 		case 5: {// Node History
-			pList.nodeHistory(1);
+			String promptPosition = "Enter a position of the node you want to see the history (0 - " + pLenght + "): ";
+			System.out.print(promptPosition);
+			int nodePosition = checkUserInput(promptPosition);
+			pList.nodeHistory(nodePosition);
 			// code
 			break;
 		}
