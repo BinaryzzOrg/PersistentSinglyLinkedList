@@ -45,6 +45,7 @@ public class Main {
 
 	public static void Menu() {
 		int pLenght = pList.length - 1;
+		String pLengthNegativeError = "\nPlease append first.";
 
 		System.out.print(printMenuChoices());
 
@@ -56,18 +57,28 @@ public class Main {
 			break;
 		}
 		case 2: {// Delete
-			String promptPosition = "Enter the position of a node to be deleted ((0 - " + pLenght + "): ";
+
+			if (pLenght < 0) {
+				System.out.println(pLengthNegativeError);
+				break;
+			}
+
+			String promptPosition = "Enter the position of a node to be deleted (0 - " + pLenght + "): ";
 			System.out.print(promptPosition);
 			pList.delete(checkUserInput(promptPosition));
 			break;
 		}
 		case 3: {// Change Value
+			if (pLenght < 0) {
+				System.out.println(pLengthNegativeError);
+				break;
+			}
 			// @formatter:off
 			String promptPosition = "Enter the position of the node you want to modify (0 - " + pLenght + "): ";
 			System.out.print(promptPosition);
 			int nodePosition = checkUserInput(promptPosition);
 
-			String promptError = "Entered position is out of bounds, the range of position/s available are (0 - " + pLenght + ")";
+			String promptError = "Entered position is out of bounds, the range of position/s available are (0 - " + pLenght + ").";
 			if (nodePosition > pLenght) {
 				System.out.println(promptError);
 				break;
@@ -87,6 +98,12 @@ public class Main {
 			break;
 		}
 		case 5: {// Node History
+
+			if (pLenght < 0) {
+				System.out.println(pLengthNegativeError);
+				break;
+			}
+
 			String promptPosition = "Enter a position of the node you want to see the history (0 - " + pLenght + "): ";
 			System.out.print(promptPosition);
 			int nodePosition = checkUserInput(promptPosition);
