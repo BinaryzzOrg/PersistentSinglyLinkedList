@@ -47,7 +47,7 @@ public class Main {
 		// @formatter:off
 		String emptyPList = "\nPlease append first.";
 		String promptError = "Entered position is out of bounds, the range of position/s available are (0 - " + pList.getPlength() + ").";
-
+		String confirmationMsg = "Operation Done.";
 		System.out.print(printMenuChoices());
 
 		switch (checkUserInput(printMenuChoices())) {
@@ -147,6 +147,7 @@ public class Main {
 			// @formatter:on
 			break;
 		}// end method
+		System.out.println("\n\n");
 		Menu();
 		// @formatter:on
 	}// end method

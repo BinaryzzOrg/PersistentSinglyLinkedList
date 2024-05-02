@@ -54,7 +54,7 @@ public class PersistentList {
 			toChange.prependFatNodes(new Node(toChange.getData()));
 			toChange.setData(value);
 		} else {
-			System.out.println("Message");
+			System.out.println("i think d nato needed, pa check nalang again");
 		}
 
 		return;
@@ -94,7 +94,7 @@ public class PersistentList {
 	public void display(int parameter) {
 		Node currentNode = root;
 
-		System.out.println((parameter == 1) ? "\nList: " : "\nList History: ");
+		System.out.print((parameter == 1) ? "\nList: " : "\nList History: ");
 		while (currentNode != null) {
 
 			if (!currentNode.isDeleted() && parameter == 1)
@@ -109,11 +109,10 @@ public class PersistentList {
 	}// end method
 
 	public void nodeHistory(int position) {
-		System.out.println("\nNode History");
 		Node foundNode = search(position);
 
 		if (foundNode != null) {
-			System.out.println("\n\n[" + foundNode.getData() + "] - Modification History: ");
+			System.out.print("\nModification History of node[" + foundNode.getData() + "]:\n");
 
 			if (foundNode.getFatNodes() != null) {
 
