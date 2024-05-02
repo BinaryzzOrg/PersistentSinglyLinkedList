@@ -77,8 +77,8 @@ public class PersistentList {
 			toChange.prependFatNodes(new Node(toChange.getData()));
 			toChange.setData(value);
 		}
-
-		System.out.println("\nChanged the Value of node[" + toChange.getFatNodes().getData() + "] to " + toChange.getData() + ".");
+    
+		System.out.println("\nChanged the Value of node[" + toChange.getFatNodes().getData() + "] to [" + toChange.getData() + "].");
 		return;
 	}// end method
 
