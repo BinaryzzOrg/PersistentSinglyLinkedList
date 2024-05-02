@@ -3,7 +3,16 @@ public class PersistentList {
 	// === FIELD VARIABLES === //
 	private Node root;
 	private Node tail;
-	public static int length = 0;
+	private int length = 0;
+	private int pLength = -1;
+
+	public int getLength() {
+		return this.length;
+	}
+
+	public int getPlength() {
+		return this.pLength;
+	}
 
 	// === CONSTRUCTOR === //
 	public PersistentList() {
@@ -21,71 +30,54 @@ public class PersistentList {
 			root = node;
 			tail = root;
 		}
+
 		length++;
+		pLength++;
 	}// end method
 
 	public void delete(int position) {
-		if (length < 0) {
-			System.out.println("Please append a value first.");
-			return;
-		}
-
-		if (outOfBounds(position)) {
-			System.out.println("Entered position is out of bounds, the range of position/s available are (0 to "
-					+ (length - 1) + ").");
-			return;
-		}
 
 		Node toDelete = search(position);
 
 		if (toDelete != null) {
 			toDelete.delete(); // sets deleted to true
 			System.out.println(toDelete.getData() + " deleted.");
+			--pLength;
 		}
 		return;
 	}// end method
 
 	public void changeValue(int position, int value) {
-
-		if (length < 0) {
-			System.out.println("Please append a value first.");
-			return;
-		}
-
-		if (outOfBounds(position)) {
-			System.out.println("Entered position is out of bounds, the range of position/s available are (0 - "
-					+ (length - 1) + ").");
-			return;
-		}
-
 		Node toChange = search(position);
 		if (toChange != null) {
 			toChange.prependFatNodes(new Node(toChange.getData()));
 			toChange.setData(value);
+		} else {
+			System.out.println("Message");
 		}
+
 		return;
 	}// end method
 
 	private Node search(int position) {
 
-		if (length < 0) {
-			System.out.println("Please append a value first.");
-			return null;
-		}
-
 		if (outOfBounds(position)) {
-			System.out.println("Entered position is out of bounds, the range of position/s available are (0 - "
-					+ (length - 1) + ").");
+			System.out.println("\nPosition out of Bounds.");
 			return null;
 		}
 
 		int counter = 0;
+		int countDeleted = 0;
 		Node currentNode = root;
 		while (counter < length) {
 
-			if (counter == position) {
+			if (currentNode.isDeleted())
+				countDeleted++;
+
+			if (counter == (position + countDeleted)) {
 				return (currentNode.isDeleted()) ? null : currentNode;
 			}
+
 			currentNode = currentNode.getNext();
 			counter++;
 		}
@@ -94,14 +86,14 @@ public class PersistentList {
 		return null;
 	}// end method
 
-	private boolean outOfBounds(int position) {
-		return (position < 0 || position > length);
+	public boolean outOfBounds(int position) {
+		return (position < 0 || position > getLength());
 	}// end method
 
 	public void display(int parameter) {
 		Node currentNode = root;
 
-		System.out.print("\nList: ");
+		System.out.println((parameter == 1) ? "\nList: " : "\nList History: ");
 		while (currentNode != null) {
 
 			if (!currentNode.isDeleted() && parameter == 1)
@@ -116,11 +108,11 @@ public class PersistentList {
 	}// end method
 
 	public void nodeHistory(int position) {
-
+		System.out.println("\nNode History");
 		Node foundNode = search(position);
 
 		if (foundNode != null) {
-			System.out.print("\n[" + foundNode.getData() + "] - Modification History: ");
+			System.out.println("\n\n[" + foundNode.getData() + "] - Modification History: ");
 
 			if (foundNode.getFatNodes() != null) {
 
@@ -130,7 +122,7 @@ public class PersistentList {
 					System.out.print(fatNodeRoot.getData() + " ");
 					fatNodeRoot = fatNodeRoot.getNext();
 				}
-				System.out.println("\n");
+				System.out.println();
 			} else {
 				System.out.print("[No History Record]\n");
 			}
