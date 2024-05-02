@@ -45,9 +45,9 @@ public class Main {
 
 	public static void Menu() {
 		// @formatter:off
-		String emptyPList = "\nPlease append first.";
-		String promptError = "Entered position is out of bounds, the range of position/s available are (0 - " + pList.getPlength() + ").";
-		String confirmationMsg = "Operation Done.";
+		String emptyPList = "\nPlease append a value in the list first.";
+		String promptError = "\nEntered position is out of bounds, the range of position/s available are (0 to " + pList.getPlength() + ").";
+		
 		System.out.print(printMenuChoices());
 
 		switch (checkUserInput(printMenuChoices())) {
@@ -64,11 +64,11 @@ public class Main {
 				break;
 			}
 
-			String promptPosition = "Enter the position of a node to be deleted (0 - " + pList.getPlength() + "): ";
-			System.out.println(promptPosition);
+			String promptPosition = "Enter the position of a node to be deleted (0 to " + pList.getPlength() + "): ";
+			System.out.print(promptPosition);
 			int nodePosition = checkUserInput(promptPosition);
 
-			if (nodePosition > pList.getPlength()) {
+			if (nodePosition > pList.getPlength() || nodePosition < 0) {
 				System.out.println(promptError);
 				break;
 			}
@@ -83,16 +83,16 @@ public class Main {
 				break;
 			}
 
-			String promptPosition = "Enter the position of the node you want to modify (0 - " + pList.getPlength() + "): ";
+			String promptPosition = "Enter the position of the node you want to modify (0 to " + pList.getPlength() + "): ";
 			System.out.print(promptPosition);
 			int nodePosition = checkUserInput(promptPosition);
 
-			if (nodePosition > pList.getPlength()) {
+			if (nodePosition > pList.getPlength() || nodePosition < 0) {
 				System.out.println(promptError);
 				break;
 			}
 
-			String promptValue = "Enter a new value: ";
+			String promptValue = "\nEnter a new value: ";
 			System.out.print(promptValue);
 			int replacementValue = checkUserInput(promptValue);
 
@@ -111,11 +111,11 @@ public class Main {
 				break;
 			}
 
-			String promptPosition = "Enter a position of the node you want to see the history (0 - " + pList.getPlength() + "): ";
+			String promptPosition = "Enter a position of the node you want to see the history (0 to " + pList.getPlength() + "): ";
 			System.out.print(promptPosition);
 			int nodePosition = checkUserInput(promptPosition);
 
-			if (nodePosition > pList.getPlength()) {
+			if (nodePosition > pList.getPlength() || nodePosition < 0) {
 				System.out.println(promptError);
 				break;
 			}
