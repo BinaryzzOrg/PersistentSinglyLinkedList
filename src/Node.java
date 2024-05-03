@@ -47,12 +47,8 @@ public class Node {
 	}
 
 	public void prependFatNodes(Node node) {
-		if (fatNodes == null) {
-			fatNodes = node;
-		} else {
-			node.setNext(fatNodes);
-			fatNodes = node;
-		}
+		node.setNext(fatNodes);
+		fatNodes = node;
 	}// end method
 
 }// end class
